@@ -1,17 +1,523 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <link rel="icon" href="favicon.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facilise | Uma novidade está surgindo</title>
+  <meta name="description" content="Conte como você guarda suas fotos e vídeos e ajude a construir uma forma mais simples de liberar espaço." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20261106-survey-device-counts" />
+  <link rel="stylesheet" href="/auth.css?v=20261031-companies-layout" />
 </head>
-
 <body>
+  <div id="appToast" class="app-toast" role="status" aria-live="polite" hidden><span data-app-toast-message></span><button type="button" data-app-toast-close aria-label="Fechar mensagem">×</button></div>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navegação principal">
+      <a href="#home" class="brand" aria-label="Página inicial da Facilise">
+        <img src="/assets/facilise-icon.png" alt="Facilise logo" />
+        <span>Facilise</span>
+      </a>
 
-  
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-panel">
+        <label class="language-control" for="languageSelect">
+          <span class="sr-only">Selecionar idioma</span>
+          <select id="languageSelect" aria-label="Selecionar idioma">
+            <option value="pt-BR">PT</option>
+            <option value="es">ES</option>
+            <option value="it">IT</option>
+            <option value="fr">FR</option>
+            <option value="de">DE</option>
+            <option value="en">EN</option>
+          </select>
+        </label>
+        <button id="authOpen" class="nav-account" type="button">Entrar</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="home" class="survey-home">
+    <section class="survey-section" aria-labelledby="surveyTitle">
+      <form id="photoSurvey" class="container survey-form">
+        <div class="survey-heading"><p>Uma novidade está surgindo · pesquisa rápida</p><h1 id="surveyTitle">Conte como você cuida das suas fotos.</h1><span>São 6 perguntas e leva menos de 2 minutos. Nas perguntas de múltipla escolha, marque todas as opções que se aplicam.</span></div>
+
+        <fieldset class="survey-question">
+          <legend><span>01</span><strong>Qual serviço você utiliza para guardar suas fotos e vídeos?</strong><small>Selecione uma ou mais opções</small></legend>
+          <div class="survey-options"><label><input type="checkbox" name="storage_service" value="google_photos"><span>Google Fotos</span></label><label><input type="checkbox" name="storage_service" value="icloud"><span>iCloud</span></label><label><input type="checkbox" name="storage_service" value="other_none"><span>Outro / nenhum</span></label></div>
+        </fieldset>
+
+        <fieldset class="survey-question" data-required-group="additional_storage">
+          <legend><span>02</span><strong>Você paga por armazenamento adicional?</strong><small>Selecione uma opção</small></legend>
+          <div class="survey-options"><label><input type="radio" name="additional_storage" value="no" required><span>Não</span></label><label><input type="radio" name="additional_storage" value="up_to_15"><span>Sim, até R$ 15/mês</span></label><label><input type="radio" name="additional_storage" value="16_to_30"><span>Sim, R$ 16–30/mês</span></label><label><input type="radio" name="additional_storage" value="above_30"><span>Sim, acima de R$ 30/mês</span></label></div>
+        </fieldset>
+
+        <fieldset class="survey-question">
+          <legend><span>03</span><strong>Qual problema mais incomodou você nos últimos 6 meses?</strong><small>Selecione uma ou mais opções</small></legend>
+          <div class="survey-options"><label><input type="checkbox" name="recent_problem" value="no_space"><span>Falta de espaço</span></label><label><input type="checkbox" name="recent_problem" value="monthly_cost"><span>Mensalidade</span></label><label><input type="checkbox" name="recent_problem" value="duplicates"><span>Fotos duplicadas</span></label><label><input type="checkbox" name="recent_problem" value="hard_to_find"><span>Dificuldade para encontrar fotos</span></label><label><input type="checkbox" name="recent_problem" value="fear_of_loss"><span>Medo de apagar/perder arquivos</span></label><label><input type="checkbox" name="recent_problem" value="none"><span>Nenhum</span></label></div>
+        </fieldset>
+
+        <fieldset class="survey-question">
+          <legend><span>04</span><strong>O que você fez para resolver o problema?</strong><small>Selecione uma ou mais opções</small></legend>
+          <div class="survey-options"><label><input type="checkbox" name="action_taken" value="deleted_files"><span>Apaguei arquivos</span></label><label><input type="checkbox" name="action_taken" value="upgraded_plan"><span>Contratei ou aumentei o plano</span></label><label><input type="checkbox" name="action_taken" value="cleaner_app"><span>Usei um aplicativo de limpeza</span></label><label><input type="checkbox" name="action_taken" value="transferred"><span>Transferi para outro lugar</span></label><label><input type="checkbox" name="action_taken" value="not_solved"><span>Não resolvi</span></label></div>
+        </fieldset>
+
+        <fieldset class="survey-question">
+          <legend><span>05</span><strong>Se um aplicativo comprovasse que pode liberar espaço sem alterar a qualidade das fotos, você teria interesse?</strong><small>Selecione uma opção</small></legend>
+          <div class="survey-options"><label><input type="radio" name="interest" value="yes" required><span>Sim, gostaria de testar</span></label><label><input type="radio" name="interest" value="maybe"><span>Talvez, dependendo da economia</span></label><label><input type="radio" name="interest" value="no"><span>Não</span></label></div>
+        </fieldset>
+
+        <fieldset class="survey-question">
+          <legend><span>06</span><strong>Quanto você consideraria pagar por uma solução que resolvesse seu problema?</strong><small>Selecione uma opção</small></legend>
+          <div class="survey-options"><label><input type="radio" name="willingness_to_pay" value="zero" required><span>Não pagaria</span></label><label><input type="radio" name="willingness_to_pay" value="up_to_19_90"><span>Até R$ 19,90</span></label><label><input type="radio" name="willingness_to_pay" value="20_to_49_90"><span>R$ 20–49,90</span></label><label><input type="radio" name="willingness_to_pay" value="50_to_99_90"><span>R$ 50–99,90</span></label><label><input type="radio" name="willingness_to_pay" value="100_plus"><span>R$ 100 ou mais</span></label></div>
+        </fieldset>
+
+        <section class="survey-contact" aria-labelledby="surveyContactTitle">
+          <div><p>Contato opcional</p><h2 id="surveyContactTitle">Quer receber mais informações?</h2><span>Deixe seu e-mail e/ou telefone. Você pode enviar a pesquisa sem preencher estes campos.</span></div>
+          <div class="survey-contact-fields"><label><span>E-mail</span><input name="contact_email" type="email" maxlength="254" autocomplete="email" placeholder="voce@exemplo.com"></label><label><span>Telefone</span><input name="contact_phone" type="tel" maxlength="32" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000"></label></div>
+        </section>
+
+        <div class="survey-submit"><div><strong>Pronto para enviar?</strong><span>O contato é opcional e será usado somente para enviar novidades.</span></div><button class="btn primary" type="submit">Enviar respostas <span>→</span></button></div>
+      </form>
+    </section>
+  </main>
+
+  <main id="sales-site" hidden>
+    <section class="hero section sales-hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Vagas de lançamento abertas</p>
+          <h1>Sua equipe de software.<br><span>Sem precisar contratar uma.</span></h1>
+          <p class="hero-text">Transforme ideias, tarefas manuais e gargalos em software que funciona — sem recrutamento, folha de pagamento ou contratos de agência complicados.</p>
+          <div class="hero-actions sales-actions">
+            <button class="btn primary sales-signup" type="button">Garantir preço de lançamento <span>→</span></button>
+            <a class="btn secondary" href="#como-funciona">Ver como funciona</a>
+          </div>
+          <div class="founding-note"><strong>US$ 100/mês</strong><span>para os primeiros assinantes · cancele quando quiser</span></div>
+          <div class="quick-prompts sales-proof" aria-label="Benefícios">
+            <span>✓ Solicitações contínuas</span><span>✓ Entregas em ciclos curtos</span><span>✓ Sem custo de contratação</span>
+          </div>
+        </div>
+        <div class="assistant-preview software-preview" aria-label="Exemplo de painel de desenvolvimento">
+          <div class="preview-topbar">
+            <div class="preview-brand"><img src="/assets/facilise-icon.png" alt="" /><span>Facilise</span></div>
+            <span class="online-badge"><i></i> Em desenvolvimento</span>
+          </div>
+          <div class="software-board">
+            <p class="board-label">ESTA SEMANA</p>
+            <article><span class="board-icon">01</span><div><strong>Portal do cliente</strong><small>Autenticação e painel responsivo</small></div><b>Concluído</b></article>
+            <article><span class="board-icon active">02</span><div><strong>Automação de cobrança</strong><small>Integração com pagamentos</small></div><b class="working">Construindo</b></article>
+            <article><span class="board-icon">03</span><div><strong>Relatório de receita</strong><small>Próximo na fila</small></div><b class="queued">Na fila</b></article>
+          </div>
+          <div class="preview-stats">
+            <div><span>Modelo</span><strong>Assinatura mensal</strong></div>
+            <div><span>Investimento</span><strong class="status-success">US$ 100/mês</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="container proof-strip">
+        <span>Apps web</span><span>Automações</span><span>Integrações e APIs</span><span>Ferramentas internas</span>
+      </div>
+    </section>
+
+    <section id="incluido" class="section task-section">
+      <div class="container">
+        <div class="section-heading left-heading">
+          <p class="eyebrow">Uma assinatura. Uma equipe inteira.</p>
+          <h2>Tudo o que você precisa para<br>tirar software do papel.</h2>
+          <p>Envie prioridades para uma fila simples. Nós projetamos, construímos e melhoramos uma solicitação por vez.</p>
+        </div>
+        <div class="task-grid">
+          <article class="task-card accent-blue"><div class="task-icon">⌘</div><span>PRODUTO</span><h3>Apps e portais web</h3><p>De MVPs a painéis de clientes: interfaces rápidas, responsivas e prontas para crescer.</p></article>
+          <article class="task-card"><div class="task-icon">↻</div><span>EFICIÊNCIA</span><h3>Automações</h3><p>Elimine planilhas, cópias manuais e tarefas repetitivas com fluxos confiáveis.</p></article>
+          <article class="task-card"><div class="task-icon">API</div><span>CONEXÕES</span><h3>Integrações e APIs</h3><p>Faça seus sistemas, dados e serviços externos trabalharem juntos com segurança.</p></article>
+          <article class="task-card"><div class="task-icon">AI</div><span>INTELIGÊNCIA</span><h3>Recursos com IA</h3><p>Adicione busca, extração, assistentes e decisões apoiadas por IA ao seu produto.</p></article>
+          <article class="task-card"><div class="task-icon">◇</div><span>OPERAÇÃO</span><h3>Ferramentas internas</h3><p>Crie os sistemas que sua equipe realmente precisa para vender, atender e operar melhor.</p></article>
+          <article class="task-card"><div class="task-icon">＋</div><span>EVOLUÇÃO</span><h3>Melhorias contínuas</h3><p>Corrija gargalos, refine experiências e entregue novas capacidades todos os meses.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section how-section">
+      <div class="container how-grid">
+        <div class="how-copy"><p class="eyebrow">Simples, flexível, sem complicação.</p><h2>Da ideia ao software entregue.</h2><p>Você define a prioridade. Nós cuidamos da estratégia técnica, design, desenvolvimento e entrega.</p><a class="text-link" href="#plano">Ver o plano de lançamento <span>→</span></a></div>
+        <ol class="flow-list">
+          <li><span>01</span><div><h3>Envie sua prioridade</h3><p>Descreva o que precisa ser criado ou melhorado. Ajudamos a definir o escopo.</p></div></li>
+          <li><span>02</span><div><h3>Nós construímos</h3><p>Trabalhamos na prioridade ativa e compartilhamos progresso com frequência.</p></div></li>
+          <li><span>03</span><div><h3>Você revisa</h3><p>Teste a entrega, dê feedback e aprove o resultado sem surpresas.</p></div></li>
+          <li><span>04</span><div><h3>Seguimos para a próxima</h3><p>Após a aprovação, iniciamos a próxima solicitação da sua fila.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="plano" class="section business-section pricing-section">
+      <div class="container pricing-wrap">
+        <div class="pricing-copy"><p class="eyebrow">Oferta para primeiros assinantes</p><h2>Comece agora por<br>US$ 100 por mês.</h2><p>Um preço especial durante o lançamento para empresas que entrarem primeiro e ajudarem a moldar o serviço.</p><ul><li>Uma solicitação ativa por vez</li><li>Fila ilimitada de solicitações</li><li>Desenvolvimento, automação e integrações</li><li>Atualizações frequentes de progresso</li><li>Cancele quando quiser</li></ul></div>
+        <div class="price-card"><span class="price-badge">PLANO DE LANÇAMENTO</span><div class="price"><sup>US$</sup><strong>100</strong><span>/mês</span></div><p>Acesso à nossa capacidade compartilhada de desenvolvimento durante o lançamento.</p><button class="btn primary sales-signup" type="button">Quero ser assinante fundador <span>→</span></button><small>O preço aumentará após o lançamento. Os planos futuros terão limites de capacidade diferentes conforme o nível contratado.</small></div>
+      </div>
+    </section>
+
+    <section id="faq" class="section security-section">
+      <div class="container security-grid"><div><p class="eyebrow">Antes de começar</p><h2>Perguntas frequentes.</h2></div><div class="security-items"><article><span>01</span><div><h3>O que posso solicitar?</h3><p>Apps web, automações, integrações, ferramentas internas, recursos com IA e melhorias em software existente.</p></div></article><article><span>02</span><div><h3>Quantas solicitações vocês fazem?</h3><p>Você pode manter quantas quiser na fila. Durante o lançamento, trabalhamos em uma prioridade ativa por vez.</p></div></article><article><span>03</span><div><h3>Por que o preço vai mudar?</h3><p>US$ 100/mês é uma condição temporária para os primeiros assinantes. Depois, novos planos refletirão diferentes níveis de capacidade.</p></div></article></div></div>
+    </section>
+
+    <section id="comecar" class="section final-cta">
+      <div class="container final-cta-card"><div><p class="eyebrow light">Seu próximo lançamento começa aqui</p><h2>Tenha uma equipe de software por US$ 100/mês.</h2><p>Entre durante o lançamento antes que o preço e os limites de capacidade mudem.</p></div><button id="ctaAuthOpen" class="btn white-btn" type="button">Garantir minha vaga <span>→</span></button></div>
+    </section>
+  </main>
+
+  <footer class="footer survey-footer">
+    <div class="container footer-top"><a href="#home" class="brand small"><img src="/assets/facilise-icon.png" alt="Facilise logo" /><span>Facilise</span></a><p>Algo novo para suas fotos<br>está começando aqui.</p></div>
+    <div class="container footer-bottom"><span>© 2026 Facilise. Todos os direitos reservados.</span><div><a href="#faq">Privacidade</a><a href="#faq">Termos</a><a href="mailto:contact@facilise.com">Contato</a></div></div>
+  </footer>
+
+  <main id="legacy-site" hidden>
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="heroEyebrow">AI Automation • Software • Workflows</p>
+          <h1 data-i18n="heroTitle">Make your business operations easier, faster and smarter.</h1>
+          <p class="hero-text" data-i18n="heroText">Facilise builds AI-powered automation, custom software and intelligent integrations that reduce manual work, connect systems and improve productivity.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn primary" data-i18n="heroCta">Start a project</a>
+            <a href="#products" class="btn secondary" data-i18n="heroSecondary">Explore products</a>
+          </div>
+          <div class="trust-row" aria-label="Highlights">
+            <span data-i18n="trust1">AI agents</span>
+            <span data-i18n="trust2">APIs</span>
+            <span data-i18n="trust3">Dashboards</span>
+            <span data-i18n="trust4">Automation</span>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Automation dashboard preview">
+          <div class="glass-card top-card">
+            <div class="status-dot"></div>
+            <div>
+              <strong data-i18n="cardTitle">Workflow automated</strong>
+              <p data-i18n="cardText">Manual process transformed into a reliable digital flow.</p>
+            </div>
+          </div>
+          <div class="orbit-logo">
+            <img src="/assets/facilise-icon.png" alt="Facilise icon" />
+          </div>
+          <div class="metric-card metric-one">
+            <span data-i18n="metric1Label">Time saved</span>
+            <strong>62%</strong>
+          </div>
+          <div class="metric-card metric-two">
+            <span data-i18n="metric2Label">Manual tasks</span>
+            <strong>-48%</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section products">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="productsEyebrow">Products & Services</p>
+          <h2 data-i18n="productsTitle">Everything you need to automate and scale operations.</h2>
+          <p data-i18n="productsText">Choose a ready-to-start solution or combine services into a custom automation roadmap.</p>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card">
+            <div class="icon">AI</div>
+            <h3 data-i18n="product1Title">AI Automation Agents</h3>
+            <p data-i18n="product1Text">Custom AI assistants that answer questions, execute workflows and support teams with reliable business context.</p>
+          </article>
+          <article class="product-card featured">
+            <div class="icon">⚙</div>
+            <h3 data-i18n="product2Title">Business Process Automation</h3>
+            <p data-i18n="product2Text">Turn repetitive manual tasks into automated flows across forms, spreadsheets, CRMs, ERPs and internal tools.</p>
+          </article>
+          <article class="product-card">
+            <div class="icon">API</div>
+            <h3 data-i18n="product3Title">System Integration & APIs</h3>
+            <p data-i18n="product3Text">Connect platforms, databases and external services with secure APIs and scalable integration layers.</p>
+          </article>
+          <article class="product-card">
+            <div class="icon"><> </div>
+            <h3 data-i18n="product4Title">Custom Software Development</h3>
+            <p data-i18n="product4Text">Web apps, internal platforms and cloud-ready systems designed around your business goals.</p>
+          </article>
+          <article class="product-card">
+            <div class="icon">MCP</div>
+            <h3 data-i18n="product5Title">MCP & Enterprise AI Gateway</h3>
+            <p data-i18n="product5Text">Controlled access to tools and company data for AI assistants, with permissions by user, group or organization.</p>
+          </article>
+          <article class="product-card">
+            <div class="icon">📊</div>
+            <h3 data-i18n="product6Title">Dashboards & Reporting</h3>
+            <p data-i18n="product6Text">Operational dashboards and reports that transform scattered data into clear business decisions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions" class="section solutions">
+      <div class="container split">
+        <div>
+          <p class="eyebrow" data-i18n="solutionsEyebrow">Why Facilise</p>
+          <h2 data-i18n="solutionsTitle">Built for companies that want less complexity and more execution.</h2>
+        </div>
+        <div class="benefits">
+          <div class="benefit"><strong data-i18n="benefit1Title">Reduce costs</strong><p data-i18n="benefit1Text">Eliminate repetitive work and reduce operational waste.</p></div>
+          <div class="benefit"><strong data-i18n="benefit2Title">Increase speed</strong><p data-i18n="benefit2Text">Accelerate processes with intelligent workflows and connected systems.</p></div>
+          <div class="benefit"><strong data-i18n="benefit3Title">Improve visibility</strong><p data-i18n="benefit3Text">Track operations, metrics and results in one place.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="section process">
+      <div class="container">
+        <div class="section-heading narrow">
+          <p class="eyebrow" data-i18n="processEyebrow">How it works</p>
+          <h2 data-i18n="processTitle">From manual pain to automated solution.</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><span>01</span><h3 data-i18n="step1Title">Discover</h3><p data-i18n="step1Text">We map your process, pain points, systems and expected business results.</p></div>
+          <div class="step"><span>02</span><h3 data-i18n="step2Title">Design</h3><p data-i18n="step2Text">We define the workflow, technology, integrations and automation strategy.</p></div>
+          <div class="step"><span>03</span><h3 data-i18n="step3Title">Deliver</h3><p data-i18n="step3Text">We build, test, deploy and improve the solution with measurable outcomes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section cta">
+      <div class="container cta-card">
+        <div>
+          <p class="eyebrow" data-i18n="ctaEyebrow">Let’s simplify your operation</p>
+          <h2 data-i18n="ctaTitle">Have a process that should be automated?</h2>
+          <p data-i18n="ctaText">Send a message and let’s identify where AI and software can save time, reduce errors and improve productivity.</p>
+        </div>
+        <a class="btn primary" href="mailto:contact@facilise.com" data-i18n="ctaButton">Contact Facilise</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" hidden>
+    <div class="container footer-inner">
+      <a href="#home" class="brand small">
+        <img src="/assets/facilise-icon.png" alt="Facilise logo" />
+        <span>Facilise</span>
+      </a>
+      <p data-i18n="footerText">AI automation and custom software for smarter operations.</p>
+    </div>
+  </footer>
+
+  <section id="authModal" class="auth-overlay" role="dialog" aria-modal="true" aria-labelledby="authTitle" hidden>
+    <div class="auth-dialog">
+      <button id="authClose" class="auth-close" type="button" aria-label="Close account dialog">&times;</button>
+      <div class="auth-heading">
+        <p class="eyebrow" id="authKicker">Welcome back</p>
+        <h2 id="authTitle">Sign in to continue</h2>
+        <p id="authCopy">Use your email, document, or phone number.</p>
+      </div>
+      <div id="authNotice" class="auth-notice" role="status" hidden></div>
+
+      <form id="authLoginForm" data-auth-view="login">
+        <label>EMAIL, DOCUMENT OR PHONE<input name="username" autocomplete="username" required placeholder="you@example.com"></label>
+        <label>PASSWORD<input name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="At least 8 characters"></label>
+        <div class="auth-form-row"><button class="auth-link" type="button" data-auth-go="forgot">Forgot password?</button></div>
+        <button class="auth-primary" type="submit">Sign in <span>&rarr;</span></button>
+        <p class="auth-switch">New to Facilise? <button class="auth-link" type="button" data-auth-go="register">Create an account</button></p>
+      </form>
+
+      <form id="authRegisterForm" data-auth-view="register" hidden>
+        <label>ACCOUNT TYPE<select name="role" required><option value="subscriber">Subscriber — I need software</option><option value="developer">Software developer — I deliver requests</option></select></label>
+        <label id="developerNicknameField">NICK<input name="nickname" minlength="3" maxlength="40" autocomplete="nickname" required placeholder="Your public name"></label>
+        <div class="auth-grid-two">
+          <label>EMAIL<input name="email" type="email" autocomplete="email" placeholder="you@example.com"></label>
+          <label>PHONE<input name="phone_number" autocomplete="tel" placeholder="+55 11 99999-9999"></label>
+        </div>
+        <label>ALPHANUMERIC DOCUMENT<input name="document_alpha" placeholder="ABC123456"></label>
+        <p id="authIdentifierHint" class="auth-field-note">Provide at least one: email, document, or phone.</p>
+        <label>PASSWORD<input name="password" type="password" autocomplete="new-password" minlength="8" maxlength="128" required placeholder="8–128 characters"></label>
+        <button class="auth-primary" type="submit">Create account <span>&rarr;</span></button>
+        <p class="auth-switch">Already registered? <button class="auth-link" type="button" data-auth-go="login">Sign in</button></p>
+      </form>
+
+      <form id="authForgotForm" data-auth-view="forgot" hidden>
+        <label>EMAIL, DOCUMENT OR PHONE<input name="identifier" autocomplete="username" required placeholder="Account identifier"></label>
+        <button class="auth-primary" type="submit">Send recovery email <span>&rarr;</span></button>
+        <p class="auth-switch"><button class="auth-link" type="button" data-auth-go="login">&larr; Back to sign in</button></p>
+      </form>
+
+      <form id="authResetForm" data-auth-view="reset" hidden>
+        <input name="token" type="hidden">
+        <label>NEW PASSWORD<input name="new_password" type="password" autocomplete="new-password" minlength="8" maxlength="128" required placeholder="8–128 characters"></label>
+        <label>CONFIRM PASSWORD<input name="confirm_password" type="password" autocomplete="new-password" minlength="8" required placeholder="Repeat your password"></label>
+        <button class="auth-primary" type="submit">Reset password <span>&rarr;</span></button>
+      </form>
+
+      <div id="authAccountView" data-auth-view="account" hidden>
+        <div class="auth-profile">
+          <div class="auth-avatar" id="authAvatar">U</div>
+          <div><strong id="authProfileEmail">Authenticated user</strong><small id="authProfileId">Protected session</small></div>
+          <span class="auth-badge">Active</span>
+        </div>
+        <dl class="auth-details"><div><dt>Document</dt><dd id="authProfileDocument">—</dd></div><div><dt>Phone</dt><dd id="authProfilePhone">—</dd></div></dl>
+        <nav class="auth-account-menu" aria-label="Account actions">
+          <button id="workspaceOpen" type="button">Perfil</button>
+          <button class="is-active" type="button" data-auth-account-panel="profile" aria-controls="authProfileForm" aria-pressed="true">Profile data</button>
+          <button type="button" data-auth-account-panel="password" aria-controls="authChangeForm" aria-pressed="false">Change password</button>
+          <button id="authLogout" class="auth-account-exit" type="button">Sign out</button>
+        </nav>
+        <form id="authProfileForm" class="auth-account-panel" data-auth-account-content="profile">
+          <h3>Update profile</h3>
+          <label>NICK<input name="nickname" minlength="3" maxlength="40" required></label>
+          <div class="auth-grid-two">
+            <label>EMAIL<input name="email" type="email" autocomplete="email"></label>
+            <label>PHONE<input name="phone_number" autocomplete="tel"></label>
+          </div>
+          <label>ALPHANUMERIC DOCUMENT<input name="document_alpha"></label>
+          <p class="auth-field-note">Provide at least one: email, document, or phone.</p>
+          <details class="profile-address-section">
+            <summary class="profile-address-title">ADDRESS (OPTIONAL)</summary>
+            <div class="auth-grid-two profile-address-fields">
+            <label data-address-label="country">COUNTRY<select name="country" autocomplete="country"><option value="">SELECT COUNTRY</option></select></label>
+            <label data-address-label="postalCode" data-address-dependent hidden>POSTAL CODE<input name="postal_code" maxlength="32" autocomplete="postal-code" inputmode="numeric"></label>
+            <label data-address-label="street" data-address-dependent hidden>STREET<input name="street_address" maxlength="160" autocomplete="street-address"></label>
+            <label data-address-label="number" data-address-dependent hidden>NUMBER<input name="address_number" maxlength="32"></label>
+            <label data-address-label="complement" data-address-dependent hidden>COMPLEMENT<input name="address_complement" maxlength="120"></label>
+            <label data-address-label="neighborhood" data-address-dependent hidden>NEIGHBORHOOD<input name="neighborhood" maxlength="120"></label>
+            <label data-address-label="city" data-address-dependent hidden>CITY<input name="city" maxlength="120" autocomplete="address-level2"></label>
+            <label data-address-label="state" data-address-dependent hidden>STATE<input name="state" maxlength="120" autocomplete="address-level1"></label>
+            </div>
+            <small class="postal-code-status" data-address-dependent hidden aria-live="polite"></small>
+          </details>
+          <button class="auth-primary" type="submit">Save profile <span>&rarr;</span></button>
+        </form>
+        <form id="authChangeForm" class="auth-account-panel" data-auth-account-content="password" hidden>
+          <h3>Change password</h3>
+          <label>CURRENT PASSWORD<input name="current_password" type="password" autocomplete="current-password" minlength="8" required></label>
+          <label>NEW PASSWORD<input name="new_password" type="password" autocomplete="new-password" minlength="8" maxlength="128" required></label>
+          <button class="auth-primary" type="submit">Update password <span>&rarr;</span></button>
+        </form>
+      </div>
+
+      <p class="auth-footnote">OAuth 2.0 Authorization Code · PKCE S256 · HTTPS</p>
+    </div>
+  </section>
+
+  <section id="workspace" class="workspace" hidden aria-label="Área logada">
+    <header class="workspace-header"><a href="#home" class="brand small"><img src="/assets/facilise-icon.png" alt="" /><span>Facilise</span></a><nav class="workspace-nav"><button data-workspace-page-link="survey-admin" data-admin-only type="button" hidden>Pesquisa</button><button class="active" data-workspace-page-link="profile" type="button">Perfil</button><button data-workspace-page-link="security" type="button">Segurança</button></nav><div><span id="workspaceRole" class="workspace-role"></span><button id="workspaceLogout" type="button">Sair</button><button id="workspaceClose" type="button">Fechar</button></div></header>
+    <main class="workspace-main">
+      <section data-workspace-page="for-me"><div class="workspace-page-heading"><p class="eyebrow">Ofertas</p><h1>Pra mim</h1><p>Ofertas selecionadas para o seu perfil aparecerão aqui.</p></div><div id="forMeList" class="company-list"><p class="request-empty">Nenhuma oferta disponível para você neste momento.</p></div></section>
+      <section data-workspace-page="requests" hidden>
+      <div class="workspace-title"><div><p class="eyebrow" data-workspace-i18n="eyebrow">Software delivery</p><h1 data-workspace-i18n="title">Requests</h1><p id="workspaceIntro" data-workspace-i18n="intro">Describe what you need, optionally set a desired due date, and track delivery.</p></div><button id="newRequestOpen" class="btn primary" type="button"><span data-workspace-i18n="newRequest">New request</span> <span>＋</span></button></div>
+      <form id="requestForm" class="request-form" hidden>
+        <div><label for="requestDescription" data-workspace-i18n="descriptionLabel">What do you want us to build?</label><textarea id="requestDescription" name="description" minlength="10" maxlength="10000" required placeholder="Describe the outcome, users, current problem, and anything we should know."></textarea></div>
+        <label for="requestDueDate"><span data-workspace-i18n="dueDateLabel">Desired due date (optional)</span><input id="requestDueDate" name="due_date" type="date"></label>
+        <label class="request-file-label"><span id="requestFileLabel">Anexo (opcional, até 10 MB)</span><input id="requestAttachment" name="attachment" type="file"></label>
+        <div class="request-form-actions"><button class="btn secondary" data-cancel-request type="button" data-workspace-i18n="cancel">Cancel</button><button class="btn primary" type="submit" data-workspace-i18n="submit">Submit request</button></div>
+      </form>
+      <div id="workspaceNotice" class="workspace-notice" hidden></div>
+      <div class="request-filters" role="tablist"><button class="active" data-request-filter="active" type="button" data-workspace-i18n="active">Active</button><button data-request-filter="assigned" type="button" id="filterAssigned">Aguardando início</button><button data-request-filter="awaiting_approval" type="button" id="filterAwaitingApproval">Aguardando aprovação</button><button data-request-filter="rejected" type="button" id="filterRejected">Rejeitadas</button><button data-request-filter="closed" type="button" data-workspace-i18n="closed">Closed</button><button data-request-filter="all" type="button" data-workspace-i18n="all">All</button></div>
+      <div id="requestList" class="request-list"><p class="request-empty">Loading requests…</p></div>
+      <nav id="requestPagination" class="request-pagination" aria-label="Request pages" hidden></nav>
+      </section>
+      <section data-workspace-page="companies" hidden>
+        <div class="workspace-page-heading company-page-heading"><div><p id="companiesEyebrow" class="eyebrow">Cadastro</p><h1 id="companiesTitle">Empresas</h1><p id="companiesCopy">Cadastre e gerencie empresas de qualquer país.</p></div><button id="newCompanyOpen" class="btn primary" type="button">Nova empresa</button></div>
+        <form id="companyForm" class="workspace-settings-form company-form" hidden>
+          <input name="id" type="hidden">
+          <label><span id="companyNameLabel">Nome comercial</span><input name="name" maxlength="160"></label>
+          <label><span id="companyLegalNameLabel">Razão social</span><input name="legal_name" maxlength="200"></label>
+          <label><span id="companyTaxIdLabel">Identificação fiscal</span><input name="tax_id" maxlength="100"></label>
+          <label><span id="companyWebsiteLabel">Site</span><input name="website" type="url" maxlength="500" placeholder="https://"></label>
+          <label><span id="companyEmailLabel">E-mail</span><input name="email" type="email" maxlength="254"></label>
+          <label><span id="companyPhoneLabel">Telefone</span><input name="phone" maxlength="50" autocomplete="tel"></label>
+          <label class="company-description"><span id="companyDescriptionLabel">Descrição</span><textarea name="description" maxlength="2000"></textarea></label>
+          <details class="profile-address-section">
+            <summary id="companyAddressTitle" class="profile-address-title">Endereço (opcional)</summary>
+            <div class="address-manager" data-address-manager="company">
+              <div class="address-list" data-address-list></div>
+              <input type="hidden" name="address_id">
+              <div class="address-manager-meta"><label>Tipo<select name="address_type"><option value="headquarters">Matriz</option><option value="branch">Filial</option></select></label><label>Identificação<input name="address_label" maxlength="80" placeholder="Ex.: Filial Centro"></label></div>
+            </div>
+            <div class="profile-address-fields">
+              <label><span data-address-label="country">País</span><select name="country" autocomplete="country"><option value="">Selecione o país</option></select></label>
+              <label data-address-dependent hidden><span data-address-label="postalCode">Código postal</span><input name="postal_code" maxlength="32" autocomplete="postal-code"></label>
+              <label data-address-dependent hidden><span data-address-label="street">Linha de endereço 1</span><input name="street_address" maxlength="160" autocomplete="street-address"></label>
+              <label data-address-dependent hidden><span data-address-label="number">Linha de endereço 2</span><input name="address_number" maxlength="32"></label>
+              <label data-address-dependent hidden><span data-address-label="complement">Linha de endereço 3</span><input name="address_complement" maxlength="120"></label>
+              <label data-address-dependent hidden><span data-address-label="neighborhood">Distrito / área</span><input name="neighborhood" maxlength="120"></label>
+              <label data-address-dependent hidden><span data-address-label="city">Cidade / localidade</span><input name="city" maxlength="120" autocomplete="address-level2"></label>
+              <label data-address-dependent hidden><span data-address-label="state">Estado / província / região</span><input name="state" maxlength="120" autocomplete="address-level1"></label>
+            </div>
+            <small class="postal-code-status" data-address-dependent hidden aria-live="polite"></small>
+            <div class="address-manager-actions"><button class="btn secondary" type="button" data-address-new>Novo endereço</button><button class="btn primary" type="button" data-address-save>Salvar endereço</button></div>
+          </details>
+          <label class="company-public"><input name="is_public" type="checkbox"><span><strong id="companyPublicLabel">Permitir exibição em pesquisas públicas</strong><small id="companyPublicHelp">A empresa poderá aparecer em pesquisas fora da área logada. Desativado por padrão.</small></span></label>
+          <div class="company-form-actions"><button id="companyCancel" class="btn secondary" type="button">Cancelar</button><button id="companySubmit" class="btn primary" type="submit">Salvar empresa</button></div>
+        </form>
+        <div id="companyList" class="company-list"><p class="request-empty">Nenhuma empresa cadastrada.</p></div>
+      </section>
+      <section data-workspace-page="offers" hidden>
+        <div class="workspace-page-heading company-page-heading"><div><p class="eyebrow">Divulgação</p><h1>Ofertas</h1><p>Crie ofertas segmentadas para suas empresas.</p></div><button id="newOfferOpen" class="btn primary" type="button">Nova oferta</button></div>
+        <form id="offerForm" class="workspace-settings-form company-form" hidden>
+          <input name="id" type="hidden"><label>Empresa<select name="company_id"></select></label><label>Título<input name="title" maxlength="160"></label>
+          <label class="company-description">Descrição<textarea name="description" maxlength="5000"></textarea></label><label class="company-description">Link da oferta<input name="link" type="url" maxlength="2048" placeholder="https://"></label>
+          <label>Início<input name="starts_on" type="text" data-local-date autocomplete="off"></label><label>Fim<input name="ends_on" type="text" data-local-date autocomplete="off"></label>
+          <fieldset class="offer-filter-group company-description"><legend>Identidades de gênero</legend><p>Selecione nenhuma, algumas ou todas.</p><div class="offer-gender-grid" data-offer-gender-grid></div></fieldset>
+          <fieldset class="offer-filter-group company-description"><legend>Pessoas específicas</legend><div class="offer-grid-add"><label>Identificar por<select name="person_identifier_type"><option value="email">E-mail</option><option value="document">Documento</option><option value="phone">Telefone</option></select></label><label>Informação<input name="person_identifier_value" maxlength="320"></label><button class="btn secondary" data-person-add type="button">Adicionar</button></div><div class="offer-rule-table" data-person-grid></div></fieldset>
+          <section class="offer-manager"><h3>Filtros de endereço</h3><p>Selecione primeiro o país. Listas vazias significam que não há restrição para aquele campo.</p><div id="offerFilterList" class="offer-filter-list"></div><input name="filter_id" type="hidden"><div class="offer-address-grid"><label>Identificação<input name="filter_label" maxlength="80"></label><label>País<select name="filter_country_code" autocomplete="country" required><option value="">Selecione o país</option></select></label></div><div data-offer-filter-dependent hidden>
+            <fieldset class="offer-filter-group"><legend>CEP / código postal</legend><div class="offer-grid-add"><label>Regra<select name="filter_postal_rule_type"><option value="include">Incluir</option><option value="exclude">Excluir</option></select></label><label>CEP<input name="filter_postal_rule_value" maxlength="32"></label><button class="btn secondary" data-postal-rule-add type="button">Adicionar</button></div><div class="offer-rule-table" data-postal-rule-grid></div><div class="offer-address-grid"><label>Intervalo: de<input name="filter_postal_range_start" maxlength="32"></label><label>Intervalo: até<input name="filter_postal_range_end" maxlength="32"></label><label>Excluir intervalo: de<input name="filter_excluded_postal_range_start" maxlength="32"></label><label>Excluir intervalo: até<input name="filter_excluded_postal_range_end" maxlength="32"></label></div></fieldset>
+            <fieldset class="offer-filter-group"><legend>Estados / regiões</legend><div class="offer-ajax-picker"><label>Pesquisar estado<input name="filter_state_search" list="offerStateOptions" autocomplete="off"><datalist id="offerStateOptions"></datalist></label><button class="btn secondary" data-filter-add-state type="button">Adicionar</button></div><div class="offer-filter-chips" data-filter-state-chips></div><small data-filter-state-status aria-live="polite"></small></fieldset>
+            <fieldset class="offer-filter-group"><legend>Cidades</legend><div class="offer-ajax-picker"><label>Pesquisar cidade<input name="filter_city_search" list="offerCityOptions" autocomplete="off"><datalist id="offerCityOptions"></datalist></label><button class="btn secondary" data-filter-add-city type="button">Adicionar</button></div><div class="offer-filter-chips" data-filter-city-chips></div><small data-filter-city-status aria-live="polite"></small></fieldset>
+            <fieldset class="offer-filter-group"><legend>Número</legend><div class="offer-grid-add"><label>Regra<select name="filter_number_rule_type"><option value="include">Incluir</option><option value="exclude">Excluir</option></select></label><label>Número<input name="filter_number_rule_value" maxlength="32"></label><button class="btn secondary" data-number-rule-add type="button">Adicionar</button></div><div class="offer-rule-table" data-number-rule-grid></div><div class="offer-address-grid"><label>Intervalo: de<input name="filter_number_range_start" maxlength="32"></label><label>Intervalo: até<input name="filter_number_range_end" maxlength="32"></label><label>Excluir intervalo: de<input name="filter_excluded_number_range_start" maxlength="32"></label><label>Excluir intervalo: até<input name="filter_excluded_number_range_end" maxlength="32"></label></div></fieldset>
+          </div><div class="address-manager-actions"><button class="btn secondary" data-filter-new type="button">Novo filtro</button><button class="btn primary" data-filter-save type="button">Salvar filtro</button></div></section>
+          <section class="offer-manager"><h3>Imagens</h3><div id="offerImageList" class="offer-image-grid"></div><label class="company-description">Selecionar imagens<input id="offerImages" type="file" accept="image/*" multiple></label><button class="btn secondary" data-image-upload type="button">Enviar imagens</button></section>
+          <label class="company-public"><input name="is_active" type="checkbox"><span><strong>Oferta ativa</strong><small>Somente ofertas ativas e dentro do período poderão ser exibidas.</small></span></label><div class="company-form-actions"><button id="offerCancel" class="btn secondary" type="button">Cancelar</button><button class="btn primary" type="submit">Salvar oferta</button></div>
+        </form>
+        <form id="offerSearchForm" class="offer-search" role="search"><label for="offerSearch">Filtrar por título</label><div><input id="offerSearch" name="q" type="search" maxlength="160" placeholder="Digite o título da oferta"><button class="btn secondary" type="submit">Filtrar</button><button class="btn secondary" data-offer-search-clear type="button">Limpar</button></div></form>
+        <div id="offerList" class="company-list"><p class="request-empty">Nenhuma oferta cadastrada.</p></div>
+        <nav id="offerPagination" class="request-pagination" aria-label="Páginas de ofertas" hidden></nav>
+      </section>
+      <section data-workspace-page="survey-admin" hidden>
+        <div class="workspace-page-heading"><p id="surveyAdminEyebrow" class="eyebrow">Pesquisa</p><h1 id="surveyAdminTitle">Resultados</h1><p id="surveyAdminCopy">Acompanhe respostas, interesse e intenção de compra da pesquisa sobre fotos.</p></div>
+        <div id="surveyStats" class="survey-stat-cards"><article><span data-survey-admin="total">Total de respostas</span><strong>—</strong></article><article><span data-survey-admin="contact">Com contato</span><strong>—</strong></article><article><span data-survey-admin="last24">Últimas 24 horas</span><strong>—</strong></article></div>
+        <div><h2 id="surveyDeviceTitle" class="survey-device-title">Envios por dispositivo</h2><div id="surveyDeviceStats" class="survey-device-cards"><article><span>Windows</span><strong>0</strong></article><article><span>Android</span><strong>0</strong></article><article><span>iOS</span><strong>0</strong></article><article><span>macOS</span><strong>0</strong></article><article><span>Linux</span><strong>0</strong></article><article><span>Chrome OS</span><strong>0</strong></article><article><span data-device-key="Other">Outros</span><strong>0</strong></article></div></div>
+        <div id="surveyCharts" class="survey-chart-grid"></div>
+        <div class="survey-results-heading"><div><h2 id="surveyResponsesTitle">Respostas recebidas</h2><p id="surveyResultCount">Carregando…</p></div><button id="surveyRefresh" class="btn secondary" type="button">Atualizar</button></div>
+        <div class="survey-table-wrap"><table class="survey-table"><thead><tr><th data-survey-column="date">Data</th><th>IP</th><th data-survey-column="device">Dispositivo</th><th data-survey-column="services">Serviços</th><th data-survey-column="problems">Problemas</th><th data-survey-column="interest">Interesse</th><th data-survey-column="value">Valor</th><th data-survey-column="contact">Contato</th></tr></thead><tbody id="surveyResultRows"><tr><td colspan="8">Carregando…</td></tr></tbody></table></div>
+        <nav id="surveyPagination" class="request-pagination" aria-label="Páginas dos resultados" hidden></nav>
+      </section>
+      <section data-workspace-page="profile" hidden><div class="workspace-page-heading"><p id="profileEyebrow" class="eyebrow">Conta</p><h1 id="profileTitle">Perfil</h1><p id="profileCopy">Atualize como você aparece e seus dados de contato.</p></div><form id="workspaceProfileForm" class="workspace-settings-form"><label><span id="profileNickLabel">Nick</span><input name="nickname" minlength="3" maxlength="40" required></label><label><span id="profileEmailLabel">E-mail</span><input name="email" type="email"></label><label><span id="profilePhoneLabel">Telefone</span><input name="phone_number"></label><label><span id="profileDocumentLabel">Documento alfanumérico</span><input name="document_alpha"></label><details class="profile-address-section"><summary id="profileAddressTitle" class="profile-address-title">Endereços (opcional)</summary><div class="address-manager" data-address-manager="profile"><div class="address-list" data-address-list></div><input type="hidden" name="address_id"><div class="address-manager-meta"><label>Tipo<select name="address_type"><option value="correspondence">Correspondência</option><option value="other">Outro</option></select></label><label>Identificação<input name="address_label" maxlength="80" placeholder="Ex.: Casa"></label></div></div><div class="profile-address-fields"><label><span id="profileCountryLabel" data-address-label="country">País</span><select name="country" autocomplete="country"><option value="">Selecione o país</option></select></label><label data-address-dependent hidden><span id="profilePostalCodeLabel" data-address-label="postalCode">CEP</span><input name="postal_code" maxlength="32" autocomplete="postal-code" inputmode="numeric"></label><label data-address-dependent hidden><span id="profileStreetLabel" data-address-label="street">Logradouro</span><input name="street_address" maxlength="160" autocomplete="street-address"></label><label data-address-dependent hidden><span id="profileNumberLabel" data-address-label="number">Número</span><input name="address_number" maxlength="32"></label><label data-address-dependent hidden><span id="profileComplementLabel" data-address-label="complement">Complemento</span><input name="address_complement" maxlength="120"></label><label data-address-dependent hidden><span id="profileNeighborhoodLabel" data-address-label="neighborhood">Bairro</span><input name="neighborhood" maxlength="120"></label><label data-address-dependent hidden><span id="profileCityLabel" data-address-label="city">Cidade</span><input name="city" maxlength="120" autocomplete="address-level2"></label><label data-address-dependent hidden><span id="profileStateLabel" data-address-label="state">Estado</span><input name="state" maxlength="120" autocomplete="address-level1"></label></div><small class="postal-code-status" data-address-dependent hidden aria-live="polite"></small><div class="address-manager-actions"><button class="btn secondary" type="button" data-address-new>Novo endereço</button><button class="btn primary" type="button" data-address-save>Salvar endereço</button></div></details><button id="profileSubmit" class="btn primary" type="submit">Salvar perfil</button></form></section>
+      <section data-workspace-page="security" hidden><div class="workspace-page-heading"><p id="securityEyebrow" class="eyebrow">Conta</p><h1 id="securityTitle">Segurança</h1><p id="securityCopy">Altere sua senha de acesso.</p></div><form id="workspaceSecurityForm" class="workspace-settings-form"><label><span id="currentPasswordLabel">Senha atual</span><input name="current_password" type="password" minlength="8" required></label><label><span id="newPasswordLabel">Nova senha</span><input name="new_password" type="password" minlength="8" maxlength="128" required></label><button id="securitySubmit" class="btn primary" type="submit">Alterar senha</button></form></section>
+    </main>
+    <div id="decisionDialog" class="decision-overlay" hidden>
+      <form id="decisionForm" class="decision-dialog">
+        <h2 id="decisionTitle">Review delivery</h2>
+        <textarea id="decisionFeedback" name="feedback" maxlength="5000"></textarea>
+        <div class="decision-dialog-actions"><button type="button" class="btn secondary" data-cancel-decision>Cancel</button><button type="submit" class="btn primary" id="decisionSubmit">Confirm</button></div>
+      </form>
+    </div>
+    <div id="deliveryDialog" class="decision-overlay" hidden>
+      <form id="deliveryForm" class="decision-dialog">
+        <h2 id="deliveryTitle">Complete delivery</h2>
+        <label class="delivery-note-label"><span id="deliveryNoteLabel">Delivery note or link (optional)</span><textarea id="deliveryNote" name="note" maxlength="5000"></textarea></label>
+        <label class="delivery-file-label"><span id="deliveryFileLabel">Attachment (optional, up to 10 MB)</span><input id="deliveryAttachment" name="attachment" type="file"></label>
+        <div class="decision-dialog-actions"><button type="button" class="btn secondary" data-cancel-delivery>Cancel</button><button type="submit" class="btn primary" id="deliverySubmit">Send for approval</button></div>
+      </form>
+    </div>
+    <div id="cancelDialog" class="decision-overlay" hidden>
+      <form id="cancelForm" class="decision-dialog cancel-dialog">
+        <h2 id="cancelTitle">Cancelar solicitação</h2>
+        <p id="cancelCopy">Tem certeza de que deseja cancelar esta solicitação?</p>
+        <div class="decision-dialog-actions"><button type="button" class="btn secondary" data-dismiss-cancel>Voltar</button><button type="submit" class="btn cancel-confirm" id="cancelSubmit">Cancelar solicitação</button></div>
+      </form>
+    </div>
+  </section>
+
+  <script src="/script.js?v=20261106-survey-i18n"></script>
+  <script src="/survey.js?v=20261106-survey-i18n"></script>
+  <script src="/auth.js?v=20261104-localized-errors"></script>
+  <script src="/workspace.js?v=20261106-survey-i18n"></script>
 </body>
-
 </html>
