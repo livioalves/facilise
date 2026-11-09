@@ -203,12 +203,7 @@ function applyLanguage(locale) {
 }
 
 function resolveInitialLanguage() {
-  const saved = localStorage.getItem('facilise-language');
-  if (salesTranslations[saved]) return saved;
-  const browser = navigator.language || 'pt-BR';
-  if (salesTranslations[browser]) return browser;
-  const base = browser.split('-')[0];
-  return salesTranslations[base] ? base : 'pt-BR';
+  return 'pt-BR';
 }
 
 languageSelect.addEventListener('change', (event) => applyLanguage(event.target.value));
