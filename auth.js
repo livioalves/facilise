@@ -281,7 +281,7 @@ function updateAuthEntry() {
 
 const authParams = new URLSearchParams(location.search);
 const OAUTH_CLIENT_ID = 'facilise-web';
-const OAUTH_REDIRECT_URI = `${location.origin}/callback`;
+const OAUTH_REDIRECT_URI = `${location.origin}/`;
 const OAUTH_SCOPE = 'profile account:write';
 let authTokens = JSON.parse(sessionStorage.getItem('facilise.tokens') || 'null');
 
