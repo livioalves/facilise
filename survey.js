@@ -77,7 +77,7 @@ function disableSurvey(message = surveyText().messages.already) {
 
 async function initializeSurveyBrowser() {
   try {
-    const response = await fetch('/api/public/photo-survey/browser', { credentials:'same-origin' });
+    const response = await fetch(faciliseApiUrl('/api/public/photo-survey/browser'), { credentials:'include' });
     if (!response.ok) throw new Error(surveyText().messages.init);
     const status = await response.json();
     surveyBrowserReady = true;
@@ -113,7 +113,7 @@ photoSurvey?.addEventListener('submit', async event => {
   const button = photoSurvey.querySelector('[type="submit"]');
   button.disabled = true;
   try {
-    const response = await fetch('/api/public/photo-survey/responses', { method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'}, body:JSON.stringify(answers) });
+    const response = await fetch(faciliseApiUrl('/api/public/photo-survey/responses'), { method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body:JSON.stringify(answers) });
     const body = await response.json().catch(() => ({}));
     if (!response.ok) {
       if (response.status === 409) { disableSurvey(); throw new Error(surveyText().messages.already); }

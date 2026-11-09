@@ -473,8 +473,8 @@ async function refreshAuthTokens() {
     const body = new URLSearchParams({
       grant_type: 'refresh_token', client_id: OAUTH_CLIENT_ID, refresh_token: refreshToken
     });
-    const response = await fetch('/api/oauth/token', {
-      method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body
+    const response = await fetch(faciliseApiUrl('/api/oauth/token'), {
+      method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body
     });
     if (!response.ok) return false;
     saveAuthTokens(await response.json());
@@ -488,7 +488,7 @@ async function authRequest(path, options = {}, retry = true) {
   const headers = new Headers(options.headers || {});
   const requestAccessToken = authTokens?.access_token;
   if (requestAccessToken) headers.set('Authorization', `Bearer ${requestAccessToken}`);
-  const response = await fetch(path, { ...fetchOptions, headers });
+  const response = await fetch(faciliseApiUrl(path), { credentials: 'include', ...fetchOptions, headers });
   if (response.status === 401 && retry && authTokens?.refresh_token) {
     if (authTokens?.access_token !== requestAccessToken || await refreshAuthTokens()) return authRequest(path, options, false);
     await signOutAuth();
@@ -512,13 +512,14 @@ async function signOutAuth() {
   updateAuthEntry();
   sessionStorage.removeItem('facilise.oauth.pending');
   if (refreshToken) {
-    await fetch('/api/oauth/revoke', {
+    await fetch(faciliseApiUrl('/api/oauth/revoke'), {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ token: refreshToken, token_type_hint: 'refresh_token', client_id: OAUTH_CLIENT_ID })
     }).catch(() => {});
   }
-  await fetch('/api/oauth/session', { method: 'DELETE' }).catch(() => {});
+  await fetch(faciliseApiUrl('/api/oauth/session'), { method: 'DELETE', credentials: 'include' }).catch(() => {});
   showAuth('login');
 }
 
@@ -562,13 +563,13 @@ document.querySelector('#authLoginForm').addEventListener('submit', event => {
   event.preventDefault();
   const data = authPayload(event.currentTarget);
   runAuth(event.submitter, async () => {
-    const response = await fetch('/api/oauth/session', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+    const response = await fetch(faciliseApiUrl('/api/oauth/session'), {
+      method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
     });
     const result = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(authError(result, response.status));
     const authorizationRequest = authParams.get('authorization_request');
-    if (authorizationRequest?.startsWith('/api/oauth/authorize?')) location.assign(authorizationRequest);
+    if (authorizationRequest?.startsWith('/api/oauth/authorize?')) location.assign(faciliseApiUrl(authorizationRequest));
     else await beginAuthAuthorization();
   });
 });
@@ -684,7 +685,7 @@ async function beginAuthAuthorization() {
     response_type: 'code', client_id: OAUTH_CLIENT_ID, redirect_uri: OAUTH_REDIRECT_URI,
     scope: OAUTH_SCOPE, state, code_challenge: challenge, code_challenge_method: 'S256'
   });
-  location.assign(`/api/oauth/authorize?${query}`);
+  location.assign(faciliseApiUrl(`/api/oauth/authorize?${query}`));
 }
 
 async function finishAuthAuthorization(code, returnedState) {
@@ -694,8 +695,8 @@ async function finishAuthAuthorization(code, returnedState) {
     grant_type: 'authorization_code', client_id: OAUTH_CLIENT_ID, code,
     redirect_uri: OAUTH_REDIRECT_URI, code_verifier: pending.verifier
   });
-  const response = await fetch('/api/oauth/token', {
-    method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body
+  const response = await fetch(faciliseApiUrl('/api/oauth/token'), {
+    method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body
   });
   const result = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(authError(result, response.status));

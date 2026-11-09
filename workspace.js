@@ -719,7 +719,7 @@ async function downloadAttachment(button) {
   try {
     await authRequest('/api/oauth/me');
     const endpoint = button.dataset.attachmentKind === 'request' ? 'request-attachment' : 'attachment';
-    const response = await fetch(`/api/requests/${button.dataset.attachmentId}/${endpoint}`, { headers:{ Authorization:`Bearer ${authTokens.access_token}` } });
+    const response = await fetch(faciliseApiUrl(`/api/requests/${button.dataset.attachmentId}/${endpoint}`), { credentials:'include', headers:{ Authorization:`Bearer ${authTokens.access_token}` } });
     if (!response.ok) throw new Error(`${workspaceText().requestFailed || 'Download failed'} (${response.status})`);
     const url = URL.createObjectURL(await response.blob());
     const link = document.createElement('a'); link.href = url; link.download = button.dataset.attachmentName; link.click();
