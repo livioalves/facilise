@@ -217,14 +217,15 @@ function workspaceFlash(message, error = false) {
   window.setTimeout(() => { workspaceNotice.hidden = true; }, 5000);
 }
 
-async function openWorkspace() {
+async function openWorkspace(initialUser = null) {
   try {
-    workspaceUser = await authRequest('/api/oauth/me');
+    workspaceUser = initialUser || await authRequest('/api/oauth/me');
     document.querySelectorAll('[data-admin-only]').forEach(element => { element.hidden = workspaceUser.role !== 'admin'; });
     document.querySelector('#workspaceRole').textContent = workspaceText().roles[workspaceUser.role] || workspaceUser.role;
     workspace.hidden = false;
     document.body.classList.add('workspace-open');
     document.querySelector('#authModal').hidden = true;
+    document.body.classList.remove('auth-open');
     document.querySelectorAll('[data-workspace-page]').forEach(section => { section.hidden = section.dataset.workspacePage !== 'profile'; });
     document.querySelectorAll('[data-workspace-page-link]').forEach(button => button.classList.toggle('active', button.dataset.workspacePageLink === 'profile'));
     requestForm.hidden = true;

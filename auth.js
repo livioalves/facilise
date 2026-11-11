@@ -730,7 +730,7 @@ async function loadAuthAccount() {
   try {
     const user = await authRequest('/api/oauth/me');
     renderAuthProfile(user);
-    if (typeof openWorkspace === 'function') await openWorkspace();
+    if (typeof openWorkspace === 'function') await openWorkspace(user);
     else showAuth('account');
   } catch (error) {
     await signOutAuth();
@@ -746,7 +746,6 @@ async function initializeAuth() {
     showAuth('login');
     authFlash(`${currentAuthText().authorizationFailed}: ${authParams.get('error')}`, true);
   } else if (authParams.get('code')) {
-    showAuth('login');
     try { await finishAuthAuthorization(authParams.get('code'), authParams.get('state')); }
     catch (error) {
       history.replaceState({}, '', '/');
