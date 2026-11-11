@@ -537,7 +537,7 @@ document.addEventListener('click', event => {
   if (button) showAuth(button.dataset.authGo);
 });
 
-authModal.querySelectorAll('input[type="password"]').forEach(input => {
+document.querySelectorAll('#authModal input[type="password"], #workspaceSecurityForm input[type="password"]').forEach(input => {
   const control = document.createElement('div');
   control.className = 'auth-password-control';
   input.before(control);
